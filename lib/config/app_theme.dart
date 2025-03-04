@@ -7,8 +7,8 @@ class AppTheme {
         textTheme: GoogleFonts.robotoMonoTextTheme(
           ThemeData.dark().textTheme,
         ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: AppColors.accent,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.selectedItemColor,
         ),
         cardTheme: CardTheme(
           shape: RoundedRectangleBorder(

@@ -23,7 +23,7 @@ class TaskCounterCard extends StatelessWidget {
                 radius: 32, // Bessere Kontrolle als `padding`
                 child: Text(
                   "$taskCount",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  style: TextTheme.of(context).headlineMedium?.copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.w800,
                       ),

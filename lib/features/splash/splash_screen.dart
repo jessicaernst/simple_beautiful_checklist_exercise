@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:simple_beautiful_checklist_exercise/config/constants.dart';
 
@@ -37,13 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 highlightColor: const Color.fromRGBO(228, 132, 255, 0.724),
                 child: Text(
                   'Willkommen zur Checkliste!',
-                  style: GoogleFonts.robotoMono(
-                    textStyle:
-                        Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              fontSize: 36,
-                              fontWeight: FontWeight.w800,
-                            ),
-                  ),
+                  style: TextTheme.of(context).headlineMedium?.copyWith(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
               ),
               const SizedBox(height: 20),

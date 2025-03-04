@@ -28,24 +28,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        textTheme: GoogleFonts.robotoMonoTextTheme(Theme.of(context).textTheme),
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
+      theme: ThemeData.dark().copyWith(
         textTheme: GoogleFonts.robotoMonoTextTheme(
-          ThemeData(brightness: Brightness.dark).textTheme,
+          ThemeData.dark().textTheme,
         ),
       ),
-      themeMode: ThemeMode.system,
       title: 'Checklisten App',
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/home': (context) => HomeScreen(
-              repository: repository,
-            ),
+        '/home': (context) => HomeScreen(repository: repository),
       },
     );
   }

@@ -42,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _selectedNavBarIndex,
-        selectedItemColor: Colors.deepPurple[200],
         onTap: (int index) {
           setState(() {
             _selectedNavBarIndex = index;

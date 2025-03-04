@@ -7,8 +7,8 @@ class AppTheme {
         textTheme: GoogleFonts.robotoMonoTextTheme(
           ThemeData.dark().textTheme,
         ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: AppColors.primary.withAlpha((0.8 * 255).toInt()),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.selectedItemColor,
         ),
       );
 }

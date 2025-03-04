@@ -5,6 +5,7 @@ abstract class AppColors {
   static const Color counterBackground =
       Color.fromARGB(255, 128, 0, 128); // Purple
   static const Color shimmerBase = Color.fromARGB(255, 255, 255, 255); // Weiß
+  static const Color selectedItemColor = Color.fromARGB(255, 179, 157, 219);
 
   static Color get accent =>
       const Color.fromARGB(255, 228, 132, 255).withAlpha((0.724 * 255).toInt());

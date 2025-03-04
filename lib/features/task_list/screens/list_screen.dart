@@ -26,19 +26,27 @@ class _ListScreenState extends State<ListScreen> {
     _updateList();
   }
 
-  void _updateList() async {
-    _items.clear();
-    _items.addAll(await widget.repository.getItems());
-    isLoading = false;
-    setState(() {});
+  Future<void> _updateList() async {
+    final newItems = await widget.repository.getItems();
+    setState(() {
+      _items.clear();
+      _items.addAll(newItems);
+      isLoading = false;
+    });
+  }
+
+  Future<void> _addTask(String task) async {
+    if (task.isNotEmpty) {
+      await widget.repository.addItem(task);
+      _controller.clear();
+      await _updateList();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meine Checkliste'),
-      ),
+      appBar: AppBar(title: const Text('Meine Checkliste')),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -57,25 +65,13 @@ class _ListScreenState extends State<ListScreen> {
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      labelText: 'Task Hinzufügen',
+                      labelText: 'Task hinzufügen',
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.add),
-                        onPressed: () {
-                          if (_controller.text.isNotEmpty) {
-                            widget.repository.addItem(_controller.text);
-                            _controller.clear();
-                            _updateList();
-                          }
-                        },
+                        onPressed: () => _addTask(_controller.text),
                       ),
                     ),
-                    onSubmitted: (value) {
-                      if (value.isNotEmpty) {
-                        widget.repository.addItem(value);
-                        _controller.clear();
-                        _updateList();
-                      }
-                    },
+                    onSubmitted: (value) => _addTask(value),
                   ),
                 ),
               ],

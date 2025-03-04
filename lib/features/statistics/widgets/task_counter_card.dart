@@ -14,7 +14,7 @@ class TaskCounterCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
         ),
         color: const Color.fromARGB(26, 222, 103, 255),
-        elevation: 5,
+        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(

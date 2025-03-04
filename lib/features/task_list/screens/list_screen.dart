@@ -23,13 +23,21 @@ class _ListScreenState extends State<ListScreen> {
   @override
   void initState() {
     super.initState();
-    _updateList();
+    _loadInitialData();
   }
 
   @override
   dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  /// lädt die Daten beim Start der App
+  Future<void> _loadInitialData() async {
+    setState(() {
+      isLoading = true;
+    });
+    await _updateList();
   }
 
   /// updated die Liste und akzualisiert das UI auch direkt

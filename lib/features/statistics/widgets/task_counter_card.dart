@@ -11,23 +11,19 @@ class TaskCounterCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        color: AppColors.cardBackground,
-        // muss man auf setzen weil Card standardmäßig Schatten hat und im only DarkMode sind shadows Design Smells
-        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // CircleAvatar ist besser als Container an dieser Stelle, da es die Größe automatisch anpasst
+              // dazu ist es weit performanter als Container hier zu verwenden und auch weit weniger Code
               CircleAvatar(
                 backgroundColor: AppColors.counterBackground,
-                radius: 28, // Bessere Kontrolle als `padding`
+                radius: 32, // Bessere Kontrolle als `padding`
                 child: Text(
                   "$taskCount",
-                  style: TextTheme.of(context).headlineMedium?.copyWith(
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.w800,
                       ),

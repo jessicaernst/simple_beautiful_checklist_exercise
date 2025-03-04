@@ -7,8 +7,15 @@ class AppTheme {
         textTheme: GoogleFonts.robotoMonoTextTheme(
           ThemeData.dark().textTheme,
         ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: AppColors.selectedItemColor,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: AppColors.accent,
+        ),
+        cardTheme: CardTheme(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          color: AppColors.cardBackground,
+          elevation: 0,
         ),
       );
 }

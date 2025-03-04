@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_beautiful_checklist_exercise/config/constants.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/empty_content.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/item_list.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
@@ -37,6 +38,9 @@ class _ListScreenState extends State<ListScreen> {
     setState(() {
       isLoading = true;
     });
+    await Future.delayed(
+      const Duration(milliseconds: shortDelayInMS),
+    );
     await _updateList();
   }
 

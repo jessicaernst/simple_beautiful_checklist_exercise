@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:simple_beautiful_checklist_exercise/config/app_colors.dart';
 import 'package:simple_beautiful_checklist_exercise/config/constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -32,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Shimmer.fromColors(
-                baseColor: Colors.white,
-                highlightColor: const Color.fromRGBO(228, 132, 255, 0.724),
+                baseColor: AppColors.shimmerBase,
+                highlightColor: AppColors.shimmerHighlight,
                 child: Text(
                   'Willkommen zur Checkliste!',
                   style: TextTheme.of(context).headlineMedium?.copyWith(

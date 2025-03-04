@@ -26,6 +26,15 @@ class _ListScreenState extends State<ListScreen> {
     _updateList();
   }
 
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  /// updated die Liste und akzualisiert das UI auch direkt
+  /// da das Abrufen der Daten Zeit benötigt, wird ein LadeIndikator angezeigt und es muss deshalb auch ein Future<void>
+  ///statt nur eines voids zurückgegeben werden
   Future<void> _updateList() async {
     final newItems = await widget.repository.getItems();
     setState(() {
@@ -35,6 +44,9 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  /// fügt einen Task hinzu und aktualisiert die Liste
+  /// ohne Future<void> würde _updateList() nicht warten, bis die Daten aktualisiert wurden
+  /// das führt dann dazu das der neue Task nicht in der Liste angezeigt wird direkt nachdem er hinzugefügt wurde
   Future<void> _addTask(String task) async {
     if (task.isNotEmpty) {
       await widget.repository.addItem(task);

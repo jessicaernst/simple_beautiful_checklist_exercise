@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_beautiful_checklist_exercise/config/app_theme.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/shared_preferences_repository.dart';
-
 import 'features/splash/splash_screen.dart';
 import 'home_screen.dart';
 
 void main() async {
-  // Wird benötigt, um auf SharedPreferences zuzugreifen
+  // sorgt dafür dass WidgetsBinding initialisiert wird und databaseRepository geladen ist bevor die App startet
   WidgetsFlutterBinding.ensureInitialized();
 
   final DatabaseRepository repository = SharedPreferencesRepository();
@@ -15,6 +14,8 @@ void main() async {
   runApp(MainApp(repository: repository));
 }
 
+/// Da das UI ausschließlich im DarkMode funktioniert so wie es hier deklariert wurde, verwende ich `ThemeData.dark()`ganz einfach hier
+/// und habe alles Überflüssige raus geworfen, das vorher da war.
 class MainApp extends StatelessWidget {
   const MainApp({
     super.key,
@@ -27,11 +28,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.robotoMonoTextTheme(
-          ThemeData.dark().textTheme,
-        ),
-      ),
+      theme: AppTheme.darkTheme,
       title: 'Checklisten App',
       initialRoute: '/',
       routes: {

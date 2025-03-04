@@ -13,6 +13,11 @@ class ItemList extends StatelessWidget {
   final List<String> items;
   final VoidCallback updateOnChange;
 
+  /// Öffnet einen Dialog zum Bearbeiten eines Tasks und speichert die Änderung
+  /// `Future<void>` ist hier nötig, weil `showDialog` und `repository.editItem` asynchron sind.
+  /// Wir müssen warten, bis der Dialog geschlossen wurde und die Daten gespeichert wurden,
+  /// bevor wir die UI updaten. Ohne `Future<void>` würde `updateOnChange()` eventuell
+  /// vor der Speicherung ausgeführt werden.
   Future<void> _editTask(BuildContext context, int index) async {
     TextEditingController editController =
         TextEditingController(text: items[index]);
@@ -37,9 +42,12 @@ class ItemList extends StatelessWidget {
               onPressed: () async {
                 if (editController.text.isNotEmpty) {
                   await repository.editItem(index, editController.text);
-                  updateOnChange();
+                  updateOnChange(); // UI-Update nach erfolgreicher Speicherung
                 }
-                if (!context.mounted) return;
+                // prüft, ob die UI noch existiert, bevor sie geschlossen wird
+                if (!context.mounted) {
+                  return; // Verhindert Fehler, falls das UI währenddessen zerstört wurde
+                }
                 Navigator.of(context).pop();
               },
             ),
@@ -49,9 +57,13 @@ class ItemList extends StatelessWidget {
     );
   }
 
+  /// Löscht einen Task aus dem Repository und aktualisiert danach die UI
+  ///
+  /// `Future<void>` ist hier nötig, weil `deleteItem` asynchron ist. Die UI wird erst
+  /// aktualisiert, wenn die Löschung tatsächlich abgeschlossen ist.
   Future<void> _deleteTask(int index) async {
     await repository.deleteItem(index);
-    updateOnChange();
+    updateOnChange(); // UI-Update erst nach erfolgreicher Löschung
   }
 
   @override

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:simple_beautiful_checklist_exercise/config/app_colors.dart';
 
 class TaskCounterCard extends StatelessWidget {
-  final int taskCount;
-
   const TaskCounterCard({super.key, required this.taskCount});
+
+  final int taskCount;
 
   @override
   Widget build(BuildContext context) {
@@ -13,35 +14,30 @@ class TaskCounterCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: const Color.fromARGB(26, 222, 103, 255),
+        color: AppColors.cardBackground,
+        // muss man auf setzen weil Card standardmäßig Schatten hat und im only DarkMode sind shadows Design Smells
         elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: const BoxDecoration(
-                  color: Colors.purple,
-                  shape: BoxShape.circle,
-                ),
+              CircleAvatar(
+                backgroundColor: AppColors.counterBackground,
+                radius: 28, // Bessere Kontrolle als `padding`
                 child: Text(
                   "$taskCount",
-                  style: const TextStyle(
-                    fontSize: 36,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextTheme.of(context).headlineMedium?.copyWith(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
               ),
               const SizedBox(width: 16),
               const Expanded(
                 child: Text(
-                  "Anzahl der offenen Tasks",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  'Anzahl der offenen Tasks',
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ],
